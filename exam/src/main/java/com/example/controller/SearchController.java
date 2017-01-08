@@ -25,10 +25,17 @@ public class SearchController {
 		(@RequestParam(value="slocation") String slocation, @RequestParam(value="elocation") String elocation) {
 		
 		if("".equals(slocation) || "".equals(elocation)){
-			return null;
+			return new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
 		
-		List<Toilet> toiletInfo = searchService.getToiletPoiInfo(slocation, elocation);
+		String[] sloc = slocation.split("\\|");
+		String[] eloc = elocation.split("\\|");
+		
+		if(sloc.length < 2 || eloc.length < 2) {
+			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		}
+		
+		List<Toilet> toiletInfo = searchService.getToiletPoiInfo(sloc, eloc);
 		
 		return new ResponseEntity(toiletInfo, HttpStatus.OK);
 	}

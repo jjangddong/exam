@@ -15,10 +15,7 @@ public class SearchServiceImpl implements SearchService {
 	@Autowired
 	private SearchRepository repository;
 	
-	public List<Toilet> getToiletPoiInfo(String slocation, String elocation) {
-		
-		String sloc[] = slocation.split("\\|");
-		String eloc[] = elocation.split("\\|");
+	public List<Toilet> getToiletPoiInfo(String[] sloc, String[] eloc) {
 		
 		double sx = Double.parseDouble(sloc[0]);
 		double ex = Double.parseDouble(eloc[0]);
